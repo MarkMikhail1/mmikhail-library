@@ -35,13 +35,8 @@
       <p>{{ austen?.name }}'s works:</p>
       <!-- Activity 9: Render a list of Austen's works. Hint: Use the v-for directive to iterate through the array of authors that you have filtered out. -->
       <ul>
-        <li v-for="author in austen" :key="author.id">
-          {{ author.name }}'s works:
-          <ul>
-            <li v-for="work in author.works" :key="work">
-              {{ work }}
-            </li>
-          </ul>
+        <li v-for="work in austenWorks" :key="work">
+          {{ work }}
         </li>
       </ul>
     </section>
@@ -107,7 +102,14 @@
     <section class="lab-section">
       <h2>Attribute, Class and Style Binding with <code>v-bind</code></h2>
       <p>Highlighting Specific Authors:</p>
-
+      <!-- Highlight Specific Authors -->
+      <ul>
+        <li v-for="author in authors" :key="author.id" 
+            :class="{ highlighted: isHighlighted(author) }"
+            :style="getAuthorStyle(author)">
+          {{ author.name }} ({{ author.birthYear }})
+        </li>
+      </ul>
     </section>
   </div>
 </template>
@@ -146,6 +148,26 @@ const austen = computed(() => {
   // TODO: CODE TO FIND AUTHOR BY ID HERE
   return authors.find(author => author.id === 1);
 })
+
+// eslint-disable-next-line vue/return-in-computed-property
+const austenWorks = computed(() => {
+  const austenAuthor = authors.find(author => author.id === 1);
+  return austenAuthor ? austenAuthor.famousWorks : [];
+});
+
+
+const textColor = ref('blue');
+const fontSize = ref(18);
+
+// Highlight George Orwell
+const isHighlighted = (author) => author.name === 'George Orwell';
+
+const getAuthorStyle = (author) => {
+  return isHighlighted(author)
+    ? { color: 'red', fontWeight: 'bold', fontSize: fontSize.value + 'px' }
+    : { color: textColor.value, fontSize: fontSize.value + 'px' };
+};
+
 </script>
 
 <style scoped>
@@ -207,5 +229,8 @@ li {
   padding: 10px;
   margin: 5px 0;
   border-radius: 5px;
+}
+.highlighted {
+  background-color: yellow;
 }
 </style>
