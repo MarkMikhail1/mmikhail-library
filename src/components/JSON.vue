@@ -21,6 +21,12 @@
           {{ author.name }} ({{ author.birthYear }})
         </li>
       </ul>
+      <!-- Activity 8: Render a list of all famous works. -->
+      <ul>
+        <li v-for="work in allFamousWorks" :key="work">
+          {{ work }}
+        </li>
+      </ul>
 
       <h3>Finding in Arrays</h3>
       <p>Finding by property: {{ orwell?.name }}</p>
@@ -28,7 +34,16 @@
       <h3>Nested Arrays/Objects</h3>
       <p>{{ austen?.name }}'s works:</p>
       <!-- Activity 9: Render a list of Austen's works. Hint: Use the v-for directive to iterate through the array of authors that you have filtered out. -->
-      <!-- TODO: CODE TO RENDER LIST OF AUSTEN'S WORKS HERE -->
+      <ul>
+        <li v-for="author in austen" :key="author.id">
+          {{ author.name }}'s works:
+          <ul>
+            <li v-for="work in author.works" :key="work">
+              {{ work }}
+            </li>
+          </ul>
+        </li>
+      </ul>
     </section>
 
     <section class="lab-section">
@@ -39,28 +54,40 @@
       <p>
         Company:
         <!-- Activity 9a: Get the company name from the bookstores object. -->
-        <!-- TODO: CODE TO GET COMPANY NAME HERE -->
+        {{ bookstores.name }}
       </p>
 
       <p>
         Total Stores:
         <!-- Activity 9b: Get the total number of stores from the bookstores object. -->
-        <!-- TODO: CODE TO GET TOTAL STORES HERE -->
+        {{ bookstores.totalStores }}
       </p>
 
       <h3>Iterating Object Properties</h3>
       <p>Store Types:</p>
       <!-- Activity 10: Iterate through the storeTypes array and display the store type and the number of stores that use that type. -->
-      <!-- TODO: CODE TO RENDER LIST OF STORE TYPES HERE -->
+      <ul>
+        <li v-for="(count, type) in bookstores.storeTypes" :key="type">
+          {{ type }}: {{ count }} stores
+        </li>
+      </ul>
 
       <h3>Nested Objects</h3>
       <p>Opening Hours:</p>
       <!-- Activity 11: Iterate through the openingHours object and display the day of the week and the opening and closing times. -->
-      <!-- TODO: CODE TO RENDER LIST OF OPENING HOURS HERE -->
+      <ul>
+        <li v-for="(hours, day) in bookstores.openingHours" :key="day">
+          {{ day }}: {{ hours.open }} - {{ hours.close }}
+        </li>
+      </ul>
 
       <h3>Working with Arrays in Objects</h3>
       <!-- Activity 12: Get the top sellers from the bookstores object. -->
-      <!-- TODO: CODE TO GET TOP SELLERS HERE -->
+      <ul>
+        <li v-for="seller in bookstores.topSellers" :key="seller">
+          {{ seller }}
+        </li>
+      </ul>
       <p>We operate in:</p>
       <p>Our #1 seller:</p>
     </section>
@@ -71,8 +98,10 @@
       <!-- Activity 13: Toggle the message visibility when the button is clicked. -->
       <!-- TODO: CODE TO TOGGLE MESSAGE VISIBILITY HERE. Hint: Use the v-if directive. -->
       <button @click="showMessage = !showMessage">Toggle Message</button>
-      <p class="message success">✨ You're a Vue superstar! ✨</p>
-      <p>Click the button to see a message.</p>
+      <p v-if="showMessage" class="message success">
+        ✨ You're a Vue superstar! ✨
+      </p>
+      <p v-else class="message">Click the button to see a message.</p>
     </section>
 
     <section class="lab-section">
@@ -88,34 +117,34 @@ import { ref, computed } from "vue"
 
 // Activity 1: Import JSON files (authors.json and bookstores.json)
 // TODO: CODE TO IMPORT JSON FILES HERE
-import authors from "../assets/authors.json"
-import bookstores from "../assets/bookstores.json"
+import authors from "../assets/json/authors.json"
+import bookstores from "../assets/json/bookstores.json"
 
 const showMessage = ref(false)
 
 // Activity 2: Get authors born after 1850
 // eslint-disable-next-line vue/return-in-computed-property
 const modernAuthors = computed(() => {
-  authors.filter((author) => author.birthYear > 1850)
+  return authors.filter((author) => author.birthYear > 1850)
 });
 
 // Activity 3: Get all famous works
 // eslint-disable-next-line vue/return-in-computed-property
 const allFamousWorks = computed(() => {
-  authors.flatMap((author) => author.famousWorks.map((work) => work.title))
+  return authors.flatMap((author) => author.famousWorks.map((work) => work.title))
 });
 
 // Activity 4: Find author by name
 // eslint-disable-next-line vue/return-in-computed-property
 const orwell = computed(() => {
-  authors.find(author => author.name === 'George Orwell');
+  return authors.find(author => author.name === 'George Orwell');
 });
 
 // Activity 5: Find author by ID
 // eslint-disable-next-line vue/return-in-computed-property
 const austen = computed(() => {
   // TODO: CODE TO FIND AUTHOR BY ID HERE
-  authors.find(author => author.id === 1);
+  return authors.find(author => author.id === 1);
 })
 </script>
 
