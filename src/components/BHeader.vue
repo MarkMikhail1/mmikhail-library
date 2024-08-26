@@ -1,21 +1,56 @@
 <template>
-    <!-- Using Bootstrap's Header template (starter code) -->
-    <!-- https://getbootstrap.com/docs/5.0/examples/headers/ -->
-    <div class="container">
+    <div class="container-fluid">
       <header class="d-flex justify-content-center py-3">
         <ul class="nav nav-pills">
           <li class="nav-item">
-            <router-link to="/" class="nav-link" active-class="active" aria-current="page"
-              >Home (Week 5)</router-link
-            >
+            <router-link to="/" class="nav-link" active-class="active" aria-current="page">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/about" class="nav-link" active-class="active">About</router-link>
+            <a @click.prevent="handleAboutClick" class="nav-link" :class="{ active: isActive('/about') }">About</a>
           </li>
         </ul>
+        <div v-if="isAuthenticated" class="ml-auto">
+            <button @click="handleLogout" class="btn btn-secondary">Logout</button>
+        </div>
       </header>
     </div>
   </template>
+  
+  <script>
+  import { isAuthenticated } from '../router';
+  import { useRouter } from 'vue-router';
+  
+  export default {
+    name: 'BHeaderComponent',
+    setup() {
+      const router = useRouter();
+  
+      const handleAboutClick = () => {
+        if (isAuthenticated.value) {
+          router.push('/about');
+        } else {
+          router.push('/login');
+        }
+      };
+
+      const handleLogout = () => {
+      isAuthenticated.value = false;
+      router.push('/login');
+    };
+  
+      const isActive = (path) => {
+        return router.currentRoute.value.path === path;
+      };
+  
+      return {
+        isAuthenticated,
+        handleAboutClick,
+        isActive,
+        handleLogout
+      };
+    }
+  };
+  </script>
   
   <style scoped>
   .b-example-divider {
@@ -39,23 +74,10 @@
     border-color: #fff;
     box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
   }
-  
-  .bi {
-    vertical-align: -0.125em;
-    fill: currentColor;
-  }
-  
-  .text-small {
-    font-size: 85%;
-  }
-  
-  .dropdown-toggle {
-    outline: 0;
-  }
-  </style>
 
-<script>
-export default {
-  name: 'BHeader'
-};
-</script>
+  .logout-button {
+  cursor: pointer;
+  color: red;
+  margin-left: 20px;
+}
+  </style>
