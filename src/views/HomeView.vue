@@ -9,7 +9,8 @@ const formData = ref({
   confirmPassword: '',
   isAustralian: false,
   reason: '',
-  gender: ''
+  gender: '',
+  suburb: 'Clayton'
 })
 
 const submittedCards = ref([])
@@ -182,6 +183,10 @@ const validateReason = () => {
             ></textarea>
             <div v-if="messages.reason" class="text-success">{{ messages.reason }}</div>
           </div>
+          <div class="mb-3">
+            <label for="reason" class="form-label">Suburb</label>
+            <input type="text" class="form-control" id="suburb" v-bind:value="formData.suburb" />
+          </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary me-2">Submit</button>
             <button type="button" class="btn btn-secondary" @click="clearForm">Clear</button>
@@ -189,51 +194,43 @@ const validateReason = () => {
         </form>
       </div>
     </div>
-  </div>
 
-  <div class="row mt-5">
-    <h4>This is a Primevue Datatable.</h4>
-    <DataTable :value="submittedCards" tableStyle="min-width: 50rem">
-      <Column field="username" header="Username"></Column>
-      <Column field="password" header="Password"></Column>
-      <Column field="isAustralian" header="Australian Resident"></Column>
-      <Column field="gender" header="Gender"></Column>
-      <Column field="reason" header="Reason"></Column>
-    </DataTable>
-  </div>
+    <div class="row mt-5">
+      <h4>This is a Primevue Datatable.</h4>
+      <DataTable :value="submittedCards" tableStyle="min-width: 50rem">
+        <Column field="username" header="Username"></Column>
+        <Column field="password" header="Password"></Column>
+        <Column field="isAustralian" header="Australian Resident"></Column>
+        <Column field="gender" header="Gender"></Column>
+        <Column field="reason" header="Reason"></Column>
+      </DataTable>
+    </div>
 
-  <div class="row mt-5" v-if="submittedCards.length">
-    <div class="d-flex flex-wrap justify-content-start">
-      <div
-        v-for="(card, index) in submittedCards"
-        :key="index"
-        class="card m-2"
-        style="width: 18rem"
-      >
-        <div class="card-header">User Information</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Username: {{ card.username }}</li>
-          <li class="list-group-item">Password: {{ card.password }}</li>
-          <li class="list-group-item">
-            Australian Resident: {{ card.isAustralian ? 'Yes' : 'No' }}
-          </li>
-          <li class="list-group-item">Gender: {{ card.gender }}</li>
-          <li class="list-group-item">Reason: {{ card.reason }}</li>
-        </ul>
+    <div class="row mt-5" v-if="submittedCards.length">
+      <div class="d-flex flex-wrap justify-content-start">
+        <div
+          v-for="(card, index) in submittedCards"
+          :key="index"
+          class="card m-2"
+          style="width: 18rem"
+        >
+          <div class="card-header">User Information</div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Username: {{ card.username }}</li>
+            <li class="list-group-item">Password: {{ card.password }}</li>
+            <li class="list-group-item">
+              Australian Resident: {{ card.isAustralian ? 'Yes' : 'No' }}
+            </li>
+            <li class="list-group-item">Gender: {{ card.gender }}</li>
+            <li class="list-group-item">Reason: {{ card.reason }}</li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.container {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  max-width: 80vw;
-  margin: 0 auto;
-  padding: 20px;
-  /* background-color: #e0bfbf; */
-  border-radius: 10px;
-}
 
 /* Class selectors */
 .form {

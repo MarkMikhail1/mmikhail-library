@@ -1,18 +1,22 @@
-// src/router/index.js
 import { createRouter, createWebHistory } from 'vue-router';
-import JSON from '../components/JSON.vue';
+import HomeView from '../views/HomeView.vue';
+import AboutView from '../views/AboutView.vue';
 
 const routes = [
 	{
 		path: '/',
 		name: 'Home',
-		component: JSON
+		component: HomeView
+	},
+	{
+		path: '/about',
+		name: 'About',
+		component: AboutView
 	}
-	// Other routes can be added here
 ];
 
 const router = createRouter({
-	history: createWebHistory(process.env.BASE_URL),
+	history: createWebHistory(),
 	routes
 });
 
