@@ -8,6 +8,12 @@
           <li class="nav-item">
             <a @click.prevent="handleAboutClick" class="nav-link" :class="{ active: isActive('/about') }">About</a>
           </li>
+          <li class="nav-item">
+            <router-link to="/FireLogin" class="nav-link" active-class="active">Firebase Login</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/FireRegister" class="nav-link" active-class="active">Firebase Register</router-link>
+          </li>
         </ul>
         <div v-if="isAuthenticated" class="ml-auto">
             <button @click="handleLogout" class="btn btn-secondary">Logout</button>

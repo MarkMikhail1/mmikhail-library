@@ -3,6 +3,8 @@ import HomeView from '../views/HomeView.vue';
 import AboutView from '../views/AboutView.vue';
 import LoginView from '../views/LoginView.vue';
 import AccessDeniedView from '../views/AccessDeniedView.vue';
+import FirebaseSigninView from '../views/FirebaseSigninView.vue';
+import FirebaseRegisterView from '@/views/FirebaseRegisterView.vue';
 import { ref } from 'vue';
 
 const isAuthenticated = ref(false);
@@ -28,6 +30,16 @@ const routes = [
 		path: '/access-denied',
 		name: 'AccessDenied',
 		component: AccessDeniedView
+	},
+	{
+		path: '/FireLogin',
+		name: 'FireLogin',
+		component: FirebaseSigninView
+	},
+	{
+		path: '/FireRegister',
+		name: 'FireRegister',
+		component: FirebaseRegisterView
 	}
 ];
 
