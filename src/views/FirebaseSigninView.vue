@@ -17,8 +17,8 @@
     signInWithEmailAndPassword(getAuth(), email.value, password.value)
       .then((data) => {
         console.log(data)
-        console.log("Firebase Register Successful!")
-        router.push("/")
+        console.log("Firebase Login Successful!")
+        router.push("/FireLogin")
         console.log(auth.currentUser) // To check the current User signed in
       }).catch((error) => {
         console.log(error.code);

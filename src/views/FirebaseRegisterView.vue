@@ -18,7 +18,7 @@
       .then((data) => {
         console.log(data)
         console.log("Firebase Register Successful!")
-        router.push("/FireLogin")
+        router.push("/FireRegister")
       }).catch((error) => {
         console.log(error.code);
       });
