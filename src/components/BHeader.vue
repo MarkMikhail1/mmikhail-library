@@ -17,6 +17,15 @@
           <li class="nav-item">
             <router-link to="/FireRegister" class="nav-link" active-class="active">Firebase Register</router-link>
           </li>
+          <li class="nav-item">
+            <router-link to="/GetBookCount" class="nav-link" active-class="active">Get Book count</router-link>
+          </li>
+          <li>
+            <router-link to="/WeatherCheck" class="nav-link" active-class="active">Get Weather</router-link>
+          </li>
+          <li>
+            <router-link to="/CountBookAPI" class="nav-link" active-class="active">Count Book API</router-link>
+          </li>
         </ul>
         <div v-if="isAuthenticated" class="ml-auto">
             <button @click="handleLogout" class="btn btn-secondary">Logout</button>

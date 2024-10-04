@@ -11,10 +11,17 @@
 
 <script>
 import BHeader from './components/BHeader.vue';
+//import CountBookAPI from './views/CountBookAPI.vue';
 
 export default {
   components: {
-    BHeader
+    BHeader,
+    //CountBookAPI
+  },
+  computed: {
+    showHeader() {
+      return this.$route.name !== 'CountBookAPI';
+    }
   }
 };
 </script>
