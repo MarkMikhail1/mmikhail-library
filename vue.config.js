@@ -1,7 +1,6 @@
+import { defineConfig } from 'vue/cli-service';
 
-
-module.exports = {
-	publicPath: process.env.NODE_ENV === 'production'
-	  ? '/mmikhail-library/'
-	  : '/'
-  }
+export default defineConfig({
+  transpileDependencies: true,
+  // Add your other configurations here
+});
