@@ -1,12 +1,31 @@
-<script setup>
-//import JSON from './components/JSON.vue';
-import LoginForm from './components/LoginForm.vue';
-//import JSONSolution from './components/JSONSolution.vue';
+<template>
+  <div id="app">
+    <header>
+      <BHeader />
+    </header>
+    <main class="main-box">
+      <router-view></router-view>
+    </main>
+  </div>
+</template>
 
+<script>
+import BHeader from './components/BHeader.vue';
+//import CountBookAPI from './views/CountBookAPI.vue';
+
+export default {
+  components: {
+    BHeader,
+    //CountBookAPI
+  },
+  computed: {
+    showHeader() {
+      return this.$route.name !== 'CountBookAPI';
+    }
+  }
+};
 </script>
 
-<template>
-  <!-- <JSON /> -->
-   <!-- <JSONSolution />-->
-    <LoginForm />
-</template>
+<style>
+/* Add your styles here */
+</style>
