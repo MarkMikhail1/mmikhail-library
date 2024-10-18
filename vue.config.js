@@ -1,5 +1,6 @@
 import { defineConfig } from '@vue/cli-service';
 
 export default defineConfig({
-	transpileDependencies: true
+  transpileDependencies: true,
+  // Add your other configurations here
 });
